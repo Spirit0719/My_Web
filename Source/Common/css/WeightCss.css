@@ -1,0 +1,91 @@
+.LeftNavTreeCustomizeRoot{
+    background:rgb(39,47,58);
+}
+.LeftNavTreeCustomizeRoot .el-menu{
+    border-right: solid 0px #e6e6e6;
+    background:rgb(39,47,58);
+    color:#fff;
+}
+.LeftNavTreeCustomizeRoot .el-submenu__title i{
+    color:#fff;
+}
+.LeftNavTreeCustomizeRoot .el-menu-item i{
+    color:#fff;
+}
+.LeftNavTreeCustomizeRoot .el-submenu .el-menu-item{
+    color:#fff;
+}
+.LeftNavTreeCustomizeRoot .el-submenu .el-menu-item:hover{
+    color: #fff;
+    background:rgb(0,0,0);
+}
+.LeftNavTreeCustomizeRoot  .el-menu-item.is-active{
+    color: #252525;
+    background:rgb(236,185,96);
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover>td{
+    background-color:rgba(236,185,96,0.2) !important;
+}
+.ZUtitle{
+    font-size: 22px;
+    color:#fff
+
+}
+.LeftNavTreeCustomizeRoot .el-submenu__title:hover{
+    color: #252525;
+    background:rgb(0,0,0);
+}
+.SystemListContainers .el-pagination.is-background .el-pager li:not(.disabled).active{
+    background:rgb(236,185,96);
+}
+
+/*暂时放到这里*/
+.up-notification {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    width: 350px;
+    color: #2F353C;
+    height: 40px;
+    text-align: right;
+    font-size: 18px;
+    line-height: 40px;
+    border-radius: 2px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #86e8f5;
+    position: fixed;
+    background-color: #0deeff;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    -webkit-transition: opacity .3s,left .3s,right .3s,top .4s,bottom .3s,-webkit-transform .3s;
+    transition: opacity .3s,left .3s,right .3s,top .4s,bottom .3s,-webkit-transform .3s;
+    transition: opacity .3s,transform .3s,left .3s,right .3s,top .4s,bottom .3s;
+    transition: opacity .3s,transform .3s,left .3s,right .3s,top .4s,bottom .3s,-webkit-transform .3s;
+    overflow: hidden;
+}
+.up-notification__group{
+    display: inline-block;
+    width: 250px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    padding-left: 10px;
+    float: left;
+}
+.up-notification_staus{
+   color: #3e999f;
+    padding-right: 10px;
+    font-size: 16px;
+}
+.up-notification__closeBtn {
+    position: absolute;
+    top: 4px;
+    right: 3px;
+    cursor: pointer;
+    color: #909399;
+    font-size: 16px;
+}

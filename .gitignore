@@ -1,0 +1,16 @@
+/.metadata
+.DS_Store
+Thumbs.db
+.eslintcache
+
+/Source/Shaders/**/*.js
+/Source/ThirdParty/Shaders/**/*.js
+
+/node_modules
+npm-debug.log
+npm-debug.log.*
+package-lock.json
+
+# WebStorm user-specific
+/.idea
+/dist

@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": true,
+    "preserveConstEnums": true,
+    "target": "ES6",
+    "locale": "zh-CN",
+    "allowJs": true,
+    "checkJs": false,
+    "diagnostics": true,
+    "extendedDiagnostics": true,
+    "forceConsistentCasingInFileNames": true,
+    "listEmittedFiles": true,
+    "outFile": "./dist/NuclearFusion.js",
+    "module": "amd",
+    "emitDeclarationOnly": true,
+    "moduleResolution": "Node"
+  },
+  "include": [
+    "./Source/TsData/**/*",
+    "./Source/TsData/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

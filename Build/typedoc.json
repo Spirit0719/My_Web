@@ -1,0 +1,11 @@
+{
+  "out": "dist/docs",
+  "exclude": "**/node_modules/**/*.*",
+  "excludeExternals": true,
+  "ignoreCompilerErrors": false,
+  "tsconfig": "/tsconfig.json",
+  "mode": "file",
+  "includeDeclarations": false,
+  "hideGenerator": true,
+  "name": "核聚变引擎(NuclearFusion)"
+}

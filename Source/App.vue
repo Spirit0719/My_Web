@@ -1,0 +1,107 @@
+
+<script>
+    import {mapGetters, mapActions, mapState, mapMutations} from 'vuex'
+
+    let self = undefined;
+    export default {
+        data() {
+            return {
+                IsMaskFullScreen: false,
+                IsAllowBack:false,
+            }
+        },
+        created() {
+            document.title = "知优科技";
+        },
+        mounted() {
+            this.$nextTick().then(function () {
+            })
+        },
+        computed: {
+            ...mapState({State: state => state}),
+            ...mapGetters([]),
+        },
+        methods: {
+            ...mapActions([]),
+            ...mapMutations([]),
+        },
+        components: {
+        },
+    }
+</script>
+
+<template>
+    <div :class="['pageBody']">
+        <!--<keep-alive :include="MainMap">-->
+        <router-view></router-view>
+        <!--</keep-alive>-->
+    </div>
+</template>
+
+<style lang="stylus">
+    html, body {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        position relative
+        font-family "San Francisco", "Roboto", "PingFang SC", "noto", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
+    }
+
+    //animation 动画速度
+    .custom-classes-transition-enter-to {
+        animation-duration: 0.4s;
+    }
+
+    .custom-classes-transition-leave-to {
+        animation-duration: 0.4s;
+    }
+
+
+    //vue过滤动画
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s ease;
+    }
+    .fade-enter, .fade-leave-active {
+        opacity: 0
+    }
+    .child-view {
+        position: absolute;
+        transition: all .5s cubic-bezier(.55,0,.1,1);
+    }
+    .slide-left-enter, .slide-right-leave-active {
+        opacity: 0;
+        -webkit-transform: translate(30px, 0);
+        transform: translate(30px, 0);
+    }
+    .slide-left-leave-active, .slide-right-enter {
+        opacity: 0;
+        -webkit-transform: translate(-30px, 0);
+        transform: translate(-30px, 0);
+    }
+
+    .pageBody {
+        position: absolute;
+        z-index: 1;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        background-color #EEE
+        overflow hidden
+    }
+
+    .hidden {
+        visibility hidden
+    }
+
+    .show {
+        visibility visible
+    }
+
+</style>

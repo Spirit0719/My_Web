@@ -1,0 +1,129 @@
+.body_big{
+    width:100%;
+    height:100%;
+    background: #ffffff;
+}
+.body_mian{
+    width:100%;
+    height:100%;
+    background: #ffffff;
+}
+.body_mian_top{
+    width: 100%;
+    font-family: "微软雅黑 Light";
+    height: 60px;
+    text-align: right;
+    position:relative;
+    font-size: 28px;
+    font-weight: 800;
+    color: #333333;
+    font-style: italic;
+    line-height: 60px;
+}
+.body_mian_text{
+    border-bottom: #333333 2px solid;
+    display: inline-block;
+    height: 60px;
+    padding-right: 20px;
+}
+.body_mian_body{
+    width: 100%;
+    padding: 20px;
+    height: calc(100% - 60px);
+    overflow: auto;
+}
+.body_mian_body::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 3px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+}
+.body_mian_body::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #535353;
+}
+.body_mian_body::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: #EDEDED;
+}
+/*滚动条*/
+.data_tree .el-tree-node .el-tree-node__content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    align-items: center;
+    height: 40px;
+    font-size: 18px;
+    line-height: 40px;
+    cursor: pointer;
+}
+.data_tree .el-tree-node .el-tree-node__expand-icon.expanded {
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.data_tree .el-tree-node  .el-tree-node__expand-icon {
+    cursor: pointer;
+    color: #C0C4CC;
+    font-size: 16px;
+    -webkit-transform: rotate(0);
+    -ms-transform: rotate(0);
+    transform: rotate(0);
+    -webkit-transition: -webkit-transform .3s ease-in-out;
+    transition: -webkit-transform .3s ease-in-out;
+    transition: transform .3s ease-in-out;
+    transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out;
+    transition: transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
+}
+.topChecketObj{
+    width: 400px;
+    height: 60px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    line-height: 50px;
+    cursor: pointer;
+    text-align: left;
+}
+.topChecketObjR{
+    width: 400px;
+    height: 60px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    line-height: 50px;
+    cursor: pointer;
+    text-align: left;
+}
+.addBtnData{
+    width:  100%;
+    height:  40px;
+    border-bottom:  1px solid #ccc;
+
+}
+.treeBody{
+    width:  100%;
+    height:  calc(100% - 40px);
+    padding-top:  10px;
+    overflow:  auto;
+}
+.treeBody::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 3px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+}
+.treeBody::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #535353;
+}
+.treeBody::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: #EDEDED;
+}
