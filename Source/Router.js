@@ -6,16 +6,22 @@ Vue.use(Router);
 
 //打包到App.js
 import Login from './page/Login'
-//分别打包
-//const Login = resolve => require(['./page/Login.vue'], resolve)
-//按组打包
-//const Home = r => require.ensure([], () => r(require('./page/Index.vue')), 'main')
-//const Home = r => require.ensure([], () => r(require('./page/Index.vue')), 'main')
-//const Home = r => require.ensure([], () => r(require('./page/Index.vue')), 'main')
+import Shp from './page/ShpCad/Shp'
+
 
 const routeList = [
     {
         path: '/',
+        name: 'Login',
+        component: Shp,
+        meta: {
+            title: '首页',
+            requiresAuth: false,
+            mainPage: false,
+        },
+    },
+    {
+        path: '/Login',
         name: 'Login',
         component: Login,
         meta: {
@@ -25,13 +31,11 @@ const routeList = [
         },
     },
     {
-        path: '/Home',
-        name: 'Home',
-        redirect: {
-            name: 'RootPage'
-        },
+        path: '/Shp',
+        name: 'Shp',
+        component: Shp,
         meta: {
-            title: '首页',
+            title: 'Shp',
             requiresAuth: false,
             mainPage: false,
         },

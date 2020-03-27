@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="input" id="1">
+    N:<input id="N" oninput="value=value.replace(/[^\d]/g,'')"/>
+    M:<input id="M" oninput="value=value.replace(/[^\d]/g,'')"/>
+    <button onclick="clickOK()">确定</button>
+</div>
+<div id="matrix">
+</div>
+<script>
+    // 用于储存矩阵总数据的数组
+    let Arrays = [];
+
+    /**
+     * 用于生成矩阵
+     */
+    function clickOK() {
+        // 获取N输入框输入的值
+        let N = document.getElementById("N"); //获取id为N的元素
+        // 获取M输入框输入的值
+        let M = document.getElementById("M"); //获取id为M的元素
+        // 如果N输入框没有输入值,默认为0
+        if (N) {
+            N = N.value;
+        }
+        // 如果M输入框没有输入值,默认为0
+        if (M) {
+            M = M.value;
+        }
+        console.log('N,M输入框架的值', N, M);
+
+        // 重置总矩阵中的数据
+        Arrays = [];
+        // 循环M,获取行数
+        for (let i = 0; i < M; i++) {
+
+            // 用户储存每行每个数字的数组
+            let arr = [];
+            // 创建str参数,用来储存每一行的字符串数据
+            let str = "";
+
+            // 循环N,获取行数
+            for (let j = 0; j < M; j++) {
+                // 获取0-1直接的随机数
+                let num = Math.round(Math.random());
+                arr.push(num);
+                // 拼接字符串
+                str = str + num + " ";
+            }
+
+            // 在matrix  DIV中插入str
+            let vcurrent = document.getElementById("matrix");
+            let newNode = document.createElement("div");
+            newNode.innerHTML = str;
+            // 将新div插入到id为1的div下面
+            vcurrent.parentNode.insertBefore(newNode, vcurrent);
+
+
+            Arrays.push(arr);
+        }
+
+        // 在matrix  DIV中插入输出值
+        let vcurrent = document.getElementById("matrix");
+        // 将新div插入到id为1的div下面
+        let newNode1 = document.createElement("div");
+        newNode1.innerHTML = "&nbsp&nbsp&nbsp";
+        vcurrent.parentNode.insertBefore(newNode1, vcurrent);
+
+        // 将新0,0  div插入到id为1的div下面
+        let newNode2 = document.createElement("div");
+        newNode2.innerHTML = "0 0";
+        vcurrent.parentNode.insertBefore(newNode2, vcurrent);
+
+        // 插入计算后的最大纵火数量
+        let num = Numbers();
+
+        let newNodeNum = document.createElement("div");
+        newNodeNum.innerHTML = "最大纵火数:" + num;
+        vcurrent.parentNode.insertBefore(newNodeNum, vcurrent);
+
+        // 插入分割符号
+        let newNode3 = document.createElement("div");
+        newNode3.innerHTML = "<<------------------------------>>";
+        vcurrent.parentNode.insertBefore(newNode3, vcurrent);
+    }
+
+    // 储存每个可纵火地点最大纵火地的数
+    let a = 0;
+    // 储存已经计算过的数据
+    let array2 = [];
+
+    /**
+     * 计算最大纵火数量
+     * @return {number}
+     */
+    function Numbers() {
+        console.log("总数组数据:", Arrays);
+        // 重置最大纵火数量
+        a = 0;
+
+        // 循环总数组
+        for (let i = 0; i < Arrays.length; i++) {
+
+            // 循环总数组里面的每一个数组
+            for (let j = 0; j < Arrays[i].length; j++) {
+
+
+                let numJ = Arrays[i][j];
+                // if (numJ === 1) {
+                if (numJ === 1) {
+
+
+                    // 重置计算过的数据;
+                    array2 = [];
+
+                    // 深度延伸计算
+                    depth(i, j);
+                    // 判断更大的纵火数量
+                    if (array2.length > a) {
+                        a = array2.length;
+                    }
+                    console.log("每轮检测的数量("+i+","+j+")", array2);
+                }
+            }
+        }
+
+        return a
+    }
+
+    /**
+     * 深度延伸计算------计算出最大可燃烧地块   i===行号   j ===列号
+     */
+    function depth(i, j) {
+        // 判断是否是已经计算过的位置,如果是的不在进行计算
+        for (let c = 0; c < array2.length; c++) {
+            if (array2[c].i === i && array2[c].j === j) {
+                return;
+            }
+        }
+        let cc = {
+            i: i,
+            j: j
+        };
+        array2.push(cc);
+        // 左上角
+        if (i === 0 && j === 0) {
+            if (Arrays[i][j + 1] === 1) {
+                depth(i, j + 1);
+            }
+            if (Arrays[i + 1][j] === 1) {
+                depth(i + 1, j);
+            }
+        }
+        // 右上角
+        else if (i === 0 && j === Arrays[i].length - 1) {
+            if (Arrays[i][j - 1] === 1) {
+                depth(i, j - 1);
+            }
+            if (Arrays[i + 1][j] === 1) {
+                depth(i + 1, j);
+            }
+        }
+        // 左下角
+        else if (i === Arrays.length - 1 && j === 0) {
+            if (Arrays[i][j + 1] === 1) {
+                depth(i, j + 1);
+            }
+            if (Arrays[i - 1][j] === 1) {
+                depth(i - 1, j);
+            }
+        }
+        // 右下角
+        else if (i === Arrays.length - 1 && j === Arrays[i].length - 1) {
+            if (Arrays[i][j - 1] === 1) {
+
+                depth(i, j - 1);
+            }
+            if (Arrays[i - 1][j] === 1) {
+
+                depth(i - 1, j);
+            }
+        }
+        // 最上
+        else if (i === 0 && j !== 0 && j !== Arrays[i].length - 1) {
+            if (Arrays[i][j + 1] === 1) {
+
+                depth(i, j + 1);
+            }
+            if (Arrays[i][j - 1] === 1) {
+
+                depth(i, j - 1);
+            }
+
+            if (Arrays[i + 1][j] === 1) {
+
+                depth(i + 1, j);
+            }
+
+        }
+        // 最下
+        else if (i === Arrays.length - 1 && j !== 0 && j !== Arrays[i].length - 1) {
+            if (Arrays[i][j + 1] === 1) {
+
+                depth(i, j + 1);
+            }
+            if (Arrays[i][j - 1] === 1) {
+
+                depth(i, j - 1);
+            }
+            if (Arrays[i - 1][j] === 1) {
+
+                depth(i - 1, j);
+            }
+
+        }
+        // 最左
+        else if (j === 0 && i !== 0 && i !== Arrays.length - 1) {
+            if (Arrays[i][j + 1] === 1) {
+
+                depth(i, j + 1);
+            }
+            if (Arrays[i][j - 1] === 1) {
+
+                depth(i, j - 1);
+            }
+            if (Arrays[i + 1][j] === 1) {
+
+                depth(i + 1, j);
+            }
+        }
+        // 最右
+        else if (j === Arrays[i].length - 1 && i !== 0 && i !== Arrays.length - 1) {
+            if (Arrays[i][j + 1] === 1) {
+
+                depth(i, j + 1);
+            }
+            if (Arrays[i][j - 1] === 1) {
+
+                depth(i, j - 1);
+            }
+            if (Arrays[i - 1][j] === 1) {
+                depth(i - 1, j);
+            }
+        }
+        // 中间
+        else if (j !== 0 && j !== Arrays[i].length - 1 && i !== 0 && i !== Arrays.length - 1) {
+            if (Arrays[i][j + 1] === 1) {
+
+                depth(i, j + 1);
+            }
+            if (Arrays[i][j - 1] === 1) {
+
+                depth(i, j - 1);
+            }
+            if (Arrays[i - 1][j] === 1) {
+
+                depth(i - 1, j);
+            }
+            if (Arrays[i + 1][j] === 1) {
+
+                depth(i + 1, j);
+            }
+        } else {
+            console.error("未列出的情况", i, j)
+        }
+
+
+    }
+
+</script>
+</body>
+</html>
