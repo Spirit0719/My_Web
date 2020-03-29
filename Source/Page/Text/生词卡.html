@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="input" id="1">
+    <h1 align="center">输入课文:</h1>
+    <textarea id="Text" style="OVERFLOW: visible;height: 600px;width: 100%"></textarea>
+    <button onclick="clickOK()" style="float: right;height: 100px;width: 200px;font-size: 30px">确定</button>
+</div>
+<div id="matrix" style="position:relative;top: 100px">
+    <div>
+        <h1 align="center">组词:</h1>
+    </div>
+    <div>
+        <span style="font-size: 30px" id="num0">一</span>:
+        <input style="height: 80px;width: 200px;font-size: 30px;position:relative;left: 10px;background-color: #d4d2d2"/>
+    </div>
+    <div>
+        <span style="font-size: 30px" id="num1">二</span>:
+        <input style="height: 80px;width: 200px;font-size: 30px;position:relative;left: 10px;background-color: #d4d2d2"/>
+    </div>
+    <div>
+        <span style="font-size: 30px" id="num2">三</span>:
+        <input style="height: 80px;width: 200px;font-size: 30px;position:relative;left: 10px;background-color: #d4d2d2"/>
+    </div>
+    <div>
+        <span style="font-size: 30px" id="num3">四</span>:
+        <input style="height: 80px;width: 200px;font-size: 30px;position:relative;left: 10px;background-color: #d4d2d2"/>
+    </div>
+    <div>
+        <span style="font-size: 30px" id="num4">五</span>:
+        <input style="height: 80px;width: 200px;font-size: 30px;position:relative;left: 10px;background-color: #d4d2d2"/>
+    </div>
+    <div>
+        <span style="font-size: 30px" id="num5">六</span>:
+        <input style="height: 80px;width: 200px;font-size: 30px;position:relative;left: 10px;background-color: #d4d2d2"/>
+    </div>
+    <div>
+        <span style="font-size: 30px" id="num6">七</span>:
+        <input style="height: 80px;width: 200px;font-size: 30px;position:relative;left: 10px;background-color: #d4d2d2"/>
+    </div>
+    <div>
+        <span style="font-size: 30px" id="num7">八</span>:
+        <input style="height: 80px;width: 200px;font-size: 30px;position:relative;left: 10px;background-color: #d4d2d2"/>
+    </div>
+    <div>
+        <span style="font-size: 30px" id="num8">九</span>:
+        <input style="height: 80px;width: 200px;font-size: 30px;position:relative;left: 10px;background-color: #d4d2d2"/>
+    </div>
+    <div>
+        <span style="font-size: 30px" id="num9">十</span>:
+        <input style="height: 80px;width: 200px;font-size: 30px;position:relative;left: 10px;background-color: #d4d2d2"/>
+    </div>
+
+</div>
+<script>
+    /**
+     * 创建生词
+     *
+     */
+    function clickOK() {
+        // 获取N输入框输入的值
+        let Text = document.getElementById("Text"); //获取id为N的元素
+        Text = Text.value;
+        console.log(Text);
+
+        // 随机获取十个汉字
+        let textTen = getNumberTem(Text);
+
+        console.log("获取的字符", textTen);
+
+
+        // 用获取到的汉字进行替换/组词
+        for (let i=0;i<textTen.length;i++) {
+            document.getElementById("num"+i).innerHTML = textTen[i];
+        }
+
+    }
+
+    /**
+     * 获取十个随机汉字
+     * @param Text
+     */
+    function getNumberTem(Text) {
+        let Texts = [];
+        for (let i = 0; i < 10; i++) {
+            let num = Math.round(Math.random() * Text.length);
+            Texts.push(Text.substr(num, 1));
+        }
+        return Texts;
+    }
+</script>
+</body>
+</html>
