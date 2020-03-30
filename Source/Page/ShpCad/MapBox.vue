@@ -5,6 +5,7 @@
     import config from '../../../Build/config'
     import UserApi from '../../TsData/Api/UserApi';
     import GeoJosn from '../../TsData/Api/GeoJson';
+    import MapBox from '../../TsData/MapBox/MapBoxBaseApi';
 
     let self = undefined;
     export default {
@@ -26,69 +27,63 @@
             ...mapState({State: state => state})
         }
         , methods: {
-
             /**
              * init  mopBox service
              */
             initMopBox() {
-                mapboxgl.accessToken = 'pk.eyJ1Ijoic3Bpcml0MDcxOSIsImEiOiJjazd0dG9vY3gwdDZpM2ZyMjRsdDcwZXplIn0.9da9zNJYHawOscJ7P2YdBg';
-                let map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v9',
-                    // style: 'mapbox://styles/mapbox/dark-v10',
-                });
-
-                map.flyTo(
-                    {
-                        center: [116.90480908806899, 36.695808203785646],
-                        zoom: 16,
-                        speed: 1.2,
-                    });
-
-                GeoJosn.GeoJson1(ret => {
-                    Logger.Log("GeoJson--Hospital数据:", ret);
-                    map.on('load', function () {       /* 为map添加load事件监听器 */
-                        map.addLayer({
-                            "id": "Hospital",
-                            "type": "fill",
-                            "layout": {},
-                            "paint": {
-                                // "fill-color": "#ff0c07",
-                                "fill-color": ["get", "Color"],
-                            },
-                            source: {
-                                "type": "geojson",
-                                /* GeoJSON格式数据 */
-                                "data": ret
-                            }
-
-                        });
-                    });
+                MapBox.init(mapboxgl);
 
 
-                });
-
-                map.on('mouseenter', 'Hospital', function() {
-                    map.getCanvas().style.cursor = 'pointer';
-                });
-
-
-                // 点击 线 图层的符号，显示信息
-                map.on('click', 'Hospital', function (e) {
-                    var coordinates = e.lngLat;
-                    var description = "房间名称:"+e.features[0].properties.name;
-
-                    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-                    }//防止数据越界
-
-                    new mapboxgl.Popup()
-                        .setLngLat(coordinates)
-                        .setHTML(description)
-                        .addTo(map);
-
-                });
-
+                // map.flyTo(
+                //     {
+                //         center: [116.90480908806899, 36.695808203785646],
+                //         zoom: 16,
+                //         speed: 1.2,
+                //     });
+                //
+                // GeoJosn.GeoJson1(ret => {
+                //     Logger.Log("GeoJson--Hospital数据:", ret);
+                //     map.on('load', function () {       /* 为map添加load事件监听器 */
+                //         map.addLayer({
+                //             "id": "Hospital",
+                //             "type": "fill",
+                //             "layout": {},
+                //             "paint": {
+                //                 // "fill-color": "#ff0c07",
+                //                 "fill-color": ["get", "Color"],
+                //             },
+                //             source: {
+                //                 "type": "geojson",
+                //                 /* GeoJSON格式数据 */
+                //                 "data": ret
+                //             }
+                //
+                //         });
+                //     });
+                //
+                //
+                // });
+                //
+                // map.on('mouseenter', 'Hospital', function() {
+                //     map.getCanvas().style.cursor = 'pointer';
+                // });
+                //
+                //
+                // // 点击 线 图层的符号，显示信息
+                // map.on('click', 'Hospital', function (e) {
+                //     let coordinates = e.lngLat;
+                //     let description = "房间名称:"+e.features[0].properties.name;
+                //
+                //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                //     }//防止数据越界
+                //
+                //     new self._mapbox.Popup()
+                //         .setLngLat(coordinates)
+                //         .setHTML(description)
+                //         .addTo(map);
+                //
+                // });
             }
         }
 
