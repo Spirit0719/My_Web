@@ -12,6 +12,7 @@ import Logger from '../../TsData/Logger';
 export default class AxiosBaseApi {
     private static baseUrl: string;
     private static config: any;
+    private static geojson:any = "";
 
     public static GetBaseUrl(config) {
         let self = this;
@@ -148,6 +149,24 @@ export default class AxiosBaseApi {
             })
                 .catch(function (error) {
                     Logger.Error("Upload上传文件错误:", error);
+                    reject()
+                });
+        })
+    }
+
+    /**
+     * 获取GeoJson数据
+     * @param url
+     * @param object
+     */
+    public static GeoJson(url, object){
+        let self = this;
+        return new Promise((resolve, reject) => {
+            axios.get(url).then(function (response) {
+                resolve(response.data)
+            })
+                .catch(function (error) {
+                    Logger.Error("GeoJson数据获取错误:", error);
                     reject()
                 });
         })

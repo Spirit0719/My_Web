@@ -5,6 +5,7 @@
     import config from '../../../Build/config'
     import UserApi from '../../TsData/Api/UserApi';
 
+    let self = undefined;
     export default {
         data() {
             return {
@@ -13,9 +14,10 @@
         },
         created() {
             AxiosBaseApi.GetBaseUrl(config);
+            self = this;
         },
         mounted() {
-
+            self.initMopBox();
         },
         activated() {
 
@@ -26,8 +28,14 @@
         }
         , methods: {
 
+            /**
+             * init  mopBox service
+             */
+            initMopBox(){
+
+            }
         }
-        ,
+
     }
 </script>
 <template>

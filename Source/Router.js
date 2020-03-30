@@ -7,13 +7,14 @@ Vue.use(Router);
 //打包到App.js
 import Login from './page/Login'
 import Shp from './page/ShpCad/Shp'
+import MapBox from './page/ShpCad/MapBox'
 
 
 const routeList = [
     {
         path: '/',
-        name: 'Login',
-        component: Shp,
+        name: '',
+        component: MapBox,
         meta: {
             title: '首页',
             requiresAuth: false,
