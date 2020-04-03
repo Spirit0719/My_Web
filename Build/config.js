@@ -7,13 +7,22 @@ module.exports = {
         autoOpenBrowser: false,
     },
     dev: {
-        BUILD_FLAG__ApiHostUrl: 'http://123.56.11.94:60430/mock/5e7864dcbdc67d002098676e/',
+        BUILD_FLAG__ApiHostUrl: JSON.stringify('http://123.56.11.94:60430/mock/5e7864dcbdc67d002098676e/'),
+        BUILD_FLAG__NODE_ENV:JSON.stringify('dev')
     },
-    qa: {
-        BUILD_FLAG__ApiHostUrl: 'http://192.168.11.7:7018/',
+    devApp:{
+        BUILD_FLAG__ApiHostUrl: JSON.stringify('http://123.56.11.94:60430/mock/5e7864dcbdc67d002098676e/'),
+        BUILD_FLAG__NODE_ENV:JSON.stringify('appDev')
     },
-    rc: {
-        BUILD_FLAG__ApiHostUrl: 'http://192.168.11.7:7018/',
+    // PC build
+    pc: {
+        BUILD_FLAG__ApiHostUrl: JSON.stringify('http://123.56.11.94:60430/mock/5e7864dcbdc67d002098676e/'),
+        BUILD_FLAG__NODE_ENV:JSON.stringify('pc')
+    },
+    // app/Android/Ios build
+    app: {
+        BUILD_FLAG__ApiHostUrl: JSON.stringify('http://123.56.11.94:60430/mock/5e7864dcbdc67d002098676e/'),
+        BUILD_FLAG__NODE_ENV:JSON.stringify('app')
     },
 };
 

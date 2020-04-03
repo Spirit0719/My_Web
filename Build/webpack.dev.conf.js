@@ -69,4 +69,5 @@ module.exports = (env, argv) => {
 };
 
 
-console.log(baseWebpackConfig);console.log(JSON.stringify(process.env),config);
+// console.log(baseWebpackConfig);
+// console.log(JSON.stringify(process.env),config);

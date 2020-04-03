@@ -4,7 +4,7 @@
     import AxiosBaseApi from '../../TsData/Base/AxiosBaseApi';
     import config from '../../../Build/config'
     import UserApi from '../../TsData/Api/UserApi';
-    import GeoJosn from '../../TsData/Api/GeoJson';
+    import GeoJosn from '../../TsData/AxiosApi/GeoJson/GeoJson';
     import MapBox from '../../TsData/MapBox/MapBoxBaseApi';
 
     let self = undefined;

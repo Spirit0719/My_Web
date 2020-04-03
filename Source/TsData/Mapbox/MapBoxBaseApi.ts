@@ -6,7 +6,7 @@
 // @ts-ignore
 import Store from '../../Store'
 import Logger from '../../TsData/Logger';
-import GeoJosn from "../Api/GeoJson";
+import GeoJosn from "../AxiosApi/GeoJson/GeoJson";
 
 export default class MapBoxBaseApi {
     public static _mapbox: any = undefined;

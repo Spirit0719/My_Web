@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "node --max-old-space-size=16192 node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --progress --config build/webpack.dev.conf.js --env.NODE_ENV=dev",
-    "qa": "webpack --config build/webpack.production.conf.js --env.NODE_ENV=qa",
-    "rc": "webpack --config build/webpack.production.conf.js --env.NODE_ENV=rc",
+    "devApp": "node --max-old-space-size=16192 node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --progress --config build/webpack.dev.conf.js --env.NODE_ENV=devApp",
+    "build_pc": "webpack --config build/webpack.production.conf.js --env.NODE_ENV=pc",
+    "build_app": "webpack --config build/webpack.production.conf.js --env.NODE_ENV=app",
     "tsdoc": "typedoc --options build/typedoc.json  --tsconfig tsconfig.json"
   },
   "keywords": [],
