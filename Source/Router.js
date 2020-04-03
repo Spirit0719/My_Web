@@ -6,8 +6,8 @@ Vue.use(Router);
 
 //打包到App.js
 import Login from './page/Login'
-import Shp from './page/ShpCad/Shp'
-import MapBox from './page/ShpCad/MapBox'
+import Shp from './Page/GIS/Shp'
+import MapBox from './Page/GIS/MapBox'
 
 
 const routeList = [
