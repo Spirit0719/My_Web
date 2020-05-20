@@ -96,4 +96,7 @@ export default class Logger {
     public static Warn: (name: string, message: string) => void = Logger._level >= Logger.LogLevels.WARNING ? Logger._WarnEnabled : Logger.consoleNothing;
     public static Error: (name: string, message: string) => void = Logger._level >= Logger.LogLevels.ERROR ? Logger._ErrorEnabled : Logger.consoleNothing;
 
+    public static AxiosLog(name,message,url){
+        console.log(">>0719AxiosLog<<====>"+name,message,url)
+    }
 }

@@ -5,24 +5,19 @@ import store from './Store'
 Vue.use(Router);
 
 //打包到App.js
-import Login from './page/Login'
-import Shp from './Page/GIS/Shp'
-import MapBox from './Page/GIS/MapBox'
+import Login from './Page/WebPage/Login'
+//分别打包
+//const Login = resolve => require(['./page/Login.vue'], resolve)
+//按组打包
+//const Home = r => require.ensure([], () => r(require('./page/Index.vue')), 'main')
+//const Home = r => require.ensure([], () => r(require('./page/Index.vue')), 'main')
+//const Home = r => require.ensure([], () => r(require('./page/Index.vue')), 'main')
 
+let routeList = undefined;
 
-const routeList = [
+const PcRouteList = [
     {
         path: '/',
-        name: '',
-        component: MapBox,
-        meta: {
-            title: '首页',
-            requiresAuth: false,
-            mainPage: false,
-        },
-    },
-    {
-        path: '/Login',
         name: 'Login',
         component: Login,
         meta: {
@@ -32,16 +27,32 @@ const routeList = [
         },
     },
     {
-        path: '/Shp',
-        name: 'Shp',
-        component: Shp,
+        path: '/Home',
+        name: 'Home',
+        redirect: {
+            name: 'RootPage'
+        },
         meta: {
-            title: 'Shp',
+            title: '首页',
             requiresAuth: false,
             mainPage: false,
         },
     },
 ];
+
+const AppRouteList = [];
+
+if (BUILD_FLAG__NODE_ENV === "dev") {
+    routeList = PcRouteList;
+} else if (BUILD_FLAG__NODE_ENV === "devApp") {
+    routeList = AppRouteList;
+} else if (BUILD_FLAG__NODE_ENV === "pc") {
+    routeList = PcRouteList;
+} else if (BUILD_FLAG__NODE_ENV === "app") {
+    routeList = AppRouteList;
+}
+
+
 const router = new Router({
     routes: routeList
 });

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+
+        }
+
+
+    </style>
+
+</head>
+<body>
+<input type="file" name="xlfile" id="xlf" onchange="Analysis(this)">
+<!--<button onclick="Analysis">analysis Excel</button>-->
+<!--<button onclick="Export">Export Excel</button>-->
+
+<script src="js/jszip.js"></script>
+<script src="js/xlsx.js"></script>
+<script>
+    /**
+     * 解析开始
+     * @param value
+     */
+    function Analysis(value) {
+        console.log(value.files[0]);
+        let f = value.files[0];
+        readFile(f);
+    }
+
+    /**
+     * 导出Export
+     */
+    function Export() {
+
+    }
+
+    /**
+     * 利用XLSX读取文件,并解析为json
+     * @param file
+     */
+    function readFile(file) {
+        let name = file.name;
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            let data = e.target.result;
+            let fileData = XLSX.read(data, {type: "binary"});
+            let aa = XLSX.utils.sheet_to_json(fileData.Sheets[fileData.SheetNames[0]]);
+            console.log(aa)
+        };
+        reader.readAsBinaryString(file);
+    }
+
+</script>
+</body>
+</html>

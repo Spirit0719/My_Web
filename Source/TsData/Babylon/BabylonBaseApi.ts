@@ -8,7 +8,6 @@ import Logger from '../../TsData/Logger';
 
 export default class BabylonBaseApi {
     public static _viewer: any = undefined;
-    public static _mapViewer: any = undefined;
 
     /**
      * init Babylon engine

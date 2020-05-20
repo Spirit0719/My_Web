@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvus</title>
+</head>
+<body>
+
+
+<script>
+    let canvas = document.createElement("canvas"); //获取canvas对象
+    // 设置canvas的宽度和高度
+    let context = canvas.getContext("2d"); //获取画布context的上下文环境
+
+    // 计算宽度
+    let width = 0;
+    let canvasText = "SunShine";
+    for (let i = 0; i < canvasText.length; i++) {
+        if (_CheckContainsChinese(canvasText[i])) {
+            width += 30;
+        } else {
+            width += 15;
+        }
+    }
+    // 绘制并填充一个圆角矩形
+    canvas.width = width;
+    canvas.height = 30;
+    canvas.style.backgroundColor = "#aaaaaa";
+    canvas.style.borderRadius = "5px";
+
+    context.fillStyle = "#aaaaaa";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    context.font = '16px Source Code Pro';
+    context.fillStyle = "#000000";
+    context.fillText(canvasText, width / 5, 22);
+
+    let img = document.createElement('img');
+    img.src = canvas.toDataURL('image/png', 1);
+    console.log(canvas.toDataURL('image/png', 1));
+    document.body.appendChild(img);
+    document.body.appendChild(canvas);
+
+    function _CheckContainsChinese(string) {
+        let reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
+        return reg.test(string);
+    }
+
+
+</script>
+</body>
+</html>

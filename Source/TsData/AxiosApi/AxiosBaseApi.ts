@@ -11,29 +11,33 @@ import Logger from '../../TsData/Logger';
 export default class AxiosBaseApi {
     private static baseUrl: string;
     private static config: any;
+    private static axiosSelf: any;
 
     public static GetBaseUrl(config, BUILD_FLAG__ApiHostUrl) {
         let self = this;
         self.config = config;
 
         self.baseUrl = BUILD_FLAG__ApiHostUrl;
-
-
         // 请求延迟
         axios.defaults.timeout = 500000;
         // 添加headers表头
         axios.defaults.headers = {
-            "Content-Type": "application/json;charset=UTF-8"
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, HEAD, OPTIONS"
         };
+        // 添加基础编辑类
+        axios.defaults.baseURL = self.baseUrl;
 
-        console.log("AxiosBaseApi默认接口", self.config);
-        let axiosSelf = axios.create({
-            // baseURL: AxiosBaseApi.url,
+
+        // console.log("AxiosBaseApi默认接口", self.config);
+        self.axiosSelf = axios.create({
+            baseURL: self.baseUrl,
             headers: {'Content-Type': 'application/json;charset=UTF-8'}
         });
 
         // 添加响应拦截器,发起请求-----时候执行
-        axiosSelf.interceptors.request.use(function (response) {
+        self.axiosSelf.interceptors.request.use(function (response) {
 
             self.config.headers["access-userid"] = Store.state.UserData.UserId;
             self.config.headers["access-token"] = Store.state.UserData.Token;
@@ -43,7 +47,7 @@ export default class AxiosBaseApi {
         });
 
         // 添加响应拦截器,返回请求得到的数据-----时候执行     ---可以用来解决用户重复登录的问题
-        axiosSelf.interceptors.response.use(function (response) {
+        self.axiosSelf.interceptors.response.use(function (response) {
             if (response.data.code === 'GW0001') {
             } else if (response.data.code === '000000') {
             } else {
@@ -58,17 +62,19 @@ export default class AxiosBaseApi {
      * Get方法获取数据
      * @param url
      * @param object
+     * @param str
      */
-    public static Get(url, object) {
+    public static Get(url, object, str) {
         let self = this;
         return new Promise((resolve, reject) => {
-            axios.get(self.baseUrl + url, {
+            axios.get(url, {
                 params: object
             }).then(function (response) {
+                Logger.AxiosLog(str, url, response.data);
                 resolve(response.data)
             })
                 .catch(function (error) {
-                    Logger.Error("Get方法获取数据错误:", error);
+                    Logger.Error("Get方法获取数据错误(" + self.baseUrl + url + "):", error);
                     reject()
                 });
         })
@@ -78,15 +84,17 @@ export default class AxiosBaseApi {
      * Post方法传递数据
      * @param url
      * @param object
+     * @param str
      */
-    public static Post(url, object) {
+    public static Post(url, object, str) {
         let self = this;
         return new Promise((resolve, reject) => {
-            axios.post(self.baseUrl + url, object).then(function (response) {
+            axios.post(url, object).then(function (response) {
+                Logger.AxiosLog(str, url, response.data);
                 resolve(response.data)
             })
                 .catch(function (error) {
-                    Logger.Error("Post方法获取/提交数据错误:", error);
+                    Logger.Error("Post方法获取/提交数据错误(" + self.baseUrl + url + "):", error);
                     reject()
                 });
         })
@@ -96,15 +104,17 @@ export default class AxiosBaseApi {
      * Put方法传递数据
      * @param url
      * @param object
+     * @param str
      */
-    public static Put(url, object) {
+    public static Put(url, object, str) {
         let self = this;
         return new Promise((resolve, reject) => {
-            axios.put(self.baseUrl + url, object).then(function (response) {
+            axios.put(url, object).then(function (response) {
+                Logger.AxiosLog(str, url, response.data);
                 resolve(response.data)
             })
                 .catch(function (error) {
-                    Logger.Error("Put方法修改数据错误:", error);
+                    Logger.Error("Put方法修改数据错误(" + self.baseUrl + url + "):", error);
                     reject()
                 });
         })
@@ -114,17 +124,19 @@ export default class AxiosBaseApi {
      * Delete 删除数据
      * @param url
      * @param object
+     * @param str
      */
-    public static Delete(url, object) {
+    public static Delete(url, object, str) {
         let self = this;
         return new Promise((resolve, reject) => {
-            axios.delete(self.baseUrl + url, {
+            axios.delete(url, {
                 data: object
             }).then(function (response) {
+                Logger.AxiosLog(str, url, response.data);
                 resolve(response.data)
             })
                 .catch(function (error) {
-                    Logger.Error("Delete方法删除数据错误:", error);
+                    Logger.Error("Delete方法删除数据错误(" + self.baseUrl + url + "):", error);
                     reject()
                 });
         })
@@ -134,15 +146,17 @@ export default class AxiosBaseApi {
      * upload 上传数据
      * @param url
      * @param object
+     * @param str
      */
-    public static Upload(url, object) {
+    public static Upload(url, object, str) {
         let self = this;
         return new Promise((resolve, reject) => {
-            axios.post(self.baseUrl + url, object, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function (response) {
+            axios.post(url, object, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function (response) {
+                Logger.AxiosLog(str, url, response.data);
                 resolve(response.data)
             })
                 .catch(function (error) {
-                    Logger.Error("Upload上传文件错误:", error);
+                    Logger.Error("Upload上传文件错误(" + self.baseUrl + url + "):", error);
                     reject()
                 });
         })
@@ -152,18 +166,21 @@ export default class AxiosBaseApi {
      * 获取GeoJson数据
      * @param url
      * @param object
+     * @param str
      */
-    public static GeoJson(url, object) {
+    public static GeoJson(url, object, str) {
         let self = this;
         return new Promise((resolve, reject) => {
             axios.get(url).then(function (response) {
+                Logger.AxiosLog(str, url, response.data);
                 resolve(response.data)
             })
                 .catch(function (error) {
-                    Logger.Error("GeoJson数据获取错误:", error);
+                    Logger.Error("GeoJson数据获取错误(" + self.baseUrl + url + "):", error);
                     reject()
                 });
         })
     }
+
 
 }
