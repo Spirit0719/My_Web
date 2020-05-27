@@ -14,9 +14,9 @@
 
 </head>
 <body>
-<input type="file" name="xlfile" id="xlf" onchange="Analysis(this)">
+<input type="file" name="xlfile" id="xlf" onchange="AnalysisExcel(this)">
 <!--<button onclick="Analysis">analysis Excel</button>-->
-<button onclick="Export()">Export Excel</button>
+<button onclick="ExportExcel()">Export Excel</button>
 
 <script src="js/jszip.js"></script>
 <script src="js/xlsx.js"></script>
@@ -28,7 +28,7 @@
      * 解析开始
      * @param value
      */
-    function Analysis(value) {
+    function AnalysisExcel(value) {
         console.log(value.files[0]);
         let f = value.files[0];
         readFile(f);
@@ -44,8 +44,7 @@
         reader.onload = function (e) {
             let data = e.target.result;
             let fileData = XLSX.read(data, {type: "binary"});
-            let aa = XLSX.utils.sheet_to_json(fileData.Sheets[fileData.SheetNames[0]]);
-            fileDataJson = aa;
+            fileDataJson = XLSX.utils.sheet_to_json(fileData.Sheets[fileData.SheetNames[0]]);
             console.log(fileDataJson)
         };
         reader.readAsBinaryString(file);
@@ -57,7 +56,7 @@
      * table_to_sheet: 将一个table dom直接转成sheet，会自动识别colspan和rowspan并将其转成对应的单元格合并；
      * json_to_sheet: 将一个由对象组成的数组转成sheet；
      */
-    function Export() {
+    function ExportExcel() {
         let json = fileDataJson;
         console.log(json);
         let sheet = XLSX.utils.json_to_sheet(json);
